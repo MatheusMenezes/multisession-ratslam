@@ -9,12 +9,12 @@ import itertools
 import sys
 
 # Importing ratslam modules 
-from MAP_RatSlamModule import ratslam
-from MAP_RatSlamModule import _globals as gb
+from ratslam import ratslam
+from ratslam import _globals as gb
 
-sys.path.insert(0, '/home/matheus/merge_ratslammodule/MAP_RatSlamModule/')
-from utils import *
+sys.path.insert(0, '/home/matheus/multisession-ratslam/ratslam/')
 from merge import *
+from utils import *
 
 import matplotlib
 from mpl_toolkits.mplot3d import Axes3D
@@ -603,7 +603,7 @@ def RatSlam_by_video(mergeSlam, time_diff):
         pos_merge = ratslam.Ratslam()
         
         # prev_slam.load('semidir') # MAURO -> SE QUISER CARREGAR O MAPA DO LACMOR, CARREGUE ESTE LOAD
-        prev_slam.load('/home/matheus/merge_ratslammodule/MAP_RatSlamModule/Saves/circle_loaded') # MAURO -> SE QUISER CARREGAR O CIRCULO, CARREGUE ESTE LOAD
+        prev_slam.load('/home/matheus/multisession-ratslam/ratslam/Saves/circle_loaded') # MAURO -> SE QUISER CARREGAR O CIRCULO, CARREGUE ESTE LOAD
         
         slam1_size = prev_slam.map.experiences.size
         find_merge = False
@@ -691,32 +691,32 @@ def RatSlam_by_video(mergeSlam, time_diff):
         slam1_size = slam2.map.experiences.size
         print(slam1_size)
         
-        # while True :
+        while True :
         
-        #     loop += 1
+            loop += 1
             
-        #     flag, frame = video.read()
+            flag, frame = video.read()
           
-        #     if frame is None:
-        #         break
+            if frame is None:
+                break
 
-        #     # if loop%2 == 0 and loop >= 92 and loop <= 205: # COMPLETE
+            # if loop%2 == 0 and loop >= 92 and loop <= 205: # COMPLETE
 
-        #     # if loop%2 == 0 and loop >= 92 and loop <= 153 : #  PARTIAL
+            # if loop%2 == 0 and loop >= 92 and loop <= 153 : #  PARTIAL
 
-        #     if loop%2 == 0 and loop >= 128 and loop <= 192 : #  LOADED
+            if loop%2 == 0 and loop >= 128 and loop <= 192 : #  LOADED
                 
-        #         print loop
-        #         img = cv2.cvtColor( frame, cv2.COLOR_BGR2GRAY )
-        #         img = np.array( img )
+                print (loop)
+                img = cv2.cvtColor( frame, cv2.COLOR_BGR2GRAY )
+                img = np.array( img )
                 
-        #         slam(img, False, 0, 0, time_diff, True)
+                slam(img, False, 0, 0, time_diff, True)
 
-        #         plotResult(slam, frame)
+                plotResult(slam, frame)
         
         # plotSaveResult_framelimit(slam, "circle_activation_map_loaded", 'navy', 202)
-        # plotSaveResult(slam, 'circle_loaded', 'navy', 'navy', 'expmap')
-        # plotSaveResult_merge(slam, "teste_circle_complete", slam1_size, 'navy', 'navy', 'orange', 'orange',  'expmap', loop)
+        plotSaveResult(slam, 'circle_loaded', 'navy', 'navy', 'expmap')
+        plotSaveResult_merge(slam, "teste_circle_complete", slam1_size, 'navy', 'navy', 'orange', 'orange',  'expmap', loop)
         
         # =================================================
         # SLAM SAVE AND PLOT =============================
